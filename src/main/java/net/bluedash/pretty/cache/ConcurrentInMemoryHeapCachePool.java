@@ -61,7 +61,7 @@ public class ConcurrentInMemoryHeapCachePool implements CachePool {
 		synchronized (pool) {
 			boolean entryFound = false;
 			Entry newEntry = new Entry("", "");
-			
+
 			for (Iterator<Entry> iter = pool.iterator(); iter.hasNext();) {
 				Entry entry = iter.next();
 
@@ -116,7 +116,11 @@ public class ConcurrentInMemoryHeapCachePool implements CachePool {
 
 	@Override
 	public void setCapacity(int capacity) {
-		synchronized(this) {
+		if (capacity < 1) {
+			throw new IllegalArgumentException();
+		}
+
+		synchronized (this) {
 			reset();
 			this.capacity.set(capacity);
 		}

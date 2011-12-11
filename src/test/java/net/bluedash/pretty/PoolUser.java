@@ -11,7 +11,7 @@ public class PoolUser implements Runnable {
 	private Random r = new Random();
 
 	private CachePool pool = CachePoolFactory
-			.getSharedConcurrentInMemoryHeapCachePool();
+			.sharedConcurrentInMemoryHeapCachePool();
 
 	@Override
 	public void run() {

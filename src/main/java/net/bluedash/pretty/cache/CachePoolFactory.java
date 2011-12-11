@@ -12,7 +12,7 @@ public class CachePoolFactory {
 		return new ConcurrentInMemoryHeapCachePool();
 	}
 
-	public static CachePool getSharedConcurrentInMemoryHeapCachePool() {
+	public static CachePool sharedConcurrentInMemoryHeapCachePool() {
 		return sharedConcurrentInMemoryHeapCachePool;
 	}
 

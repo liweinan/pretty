@@ -43,7 +43,7 @@ public class ConcurrentInMemoryHeapCachePoolTest {
 
 		for (int i = 0; i < 100; i++) {
 			Random r = new Random();
-			CachePoolFactory.getSharedConcurrentInMemoryHeapCachePool()
+			CachePoolFactory.sharedConcurrentInMemoryHeapCachePool()
 					.setCapacity(Math.abs(r.nextInt() % 100) + 1);
 			PoolUser user = new PoolUser();
 			Thread clientThread = new Thread(user);
@@ -54,7 +54,17 @@ public class ConcurrentInMemoryHeapCachePoolTest {
 		for (Thread t : threads) {
 			t.join();
 		}
+	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testIllegalArgument() {
+		CachePool pool = CachePoolFactory.newConcurrentInMemoryHeapCachePool();
+		pool.setCapacity(0);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testIllegalArgument2() {
+		CachePoolFactory.newConcurrentInMemoryHeapCachePool(0);
 	}
 
 }
